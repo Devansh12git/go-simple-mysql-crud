@@ -10,8 +10,9 @@ import (
 )
 
 func main() {
- r := mux.NewRouter()
- routes.RegisterBookstoreRoutes(r)
- http.Handle("/", r)
- log.Fatal(http.ListenAndServe("localhost:9010", r))
+	r := mux.NewRouter()
+	routes.RegisterBookstoreRoutes(r)
+	http.Handle("/", r)
+	log.Println("server started at port 9010")
+	log.Fatal(http.ListenAndServe("localhost:9010", r))
 }

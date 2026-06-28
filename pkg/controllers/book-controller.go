@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -14,14 +15,17 @@ import (
 var NewBook models.Book
 
 func GetBooks(w http.ResponseWriter, r *http.Request) {
+	log.Println("inside method Get Books")
 	newBooks := models.GetAllBooks()
 	res, _ := json.Marshal(newBooks)
+	log.Println(res)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
 }
 
 func GetBookById(w http.ResponseWriter, r *http.Request) {
+	log.Println("inside method Get Books")
 	vars := mux.Vars(r)
 	bookId := vars["id"]
 	Id, err := strconv.ParseInt(bookId, 0, 0)
@@ -43,7 +47,7 @@ func CreateBook(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
-}	
+}
 
 func DeleteBook(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
